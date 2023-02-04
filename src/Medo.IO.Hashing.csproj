@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+    <LangVersion>11.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>Medo.IO.Hashing</AssemblyName>
+    <RootNamespace>Medo.IO.Hashing</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Medo.IO.Hashing</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Josip Medved</Authors>
+    <Copyright>Copyright (c) 2007 Josip Medved</Copyright>
+    <Company>www.medo64.com</Company>
+    <PackageTags>crc,crc8,crc16,crc32,crc64,damm,fletcher16,iso7064</PackageTags>
+    <PackageIcon>ICON.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/medo64/Medo.IO.Hashing/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/medo64/Medo.IO.Hashing/</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Description>Non-cryptographic hashing algorithms.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../ICON.png" Pack="true" PackagePath="" />
+    <None Include="../README.md" Pack="true" PackagePath="" />
+    <None Include="../LICENSE.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Hashing" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,13 @@
+bin/
+build/
+dist/
+research/
+
+**/.vs/
+**/bin/
+**/obj/
+
+.*.swp
+*.zip
+
+.nuget.key
