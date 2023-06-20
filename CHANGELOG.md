@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] - 2023-06-19
+
+- Updated readme
+
+
 ## [1.1.0] - 2023-06-19
 
 - Updated PackageId
@@ -17,6 +22,7 @@
 
 
 [unreleased]: https://github.com/medo64/Medo.Checksums/
+[1.1.1]: https://www.nuget.org/packages/Medo.Checksums/1.1.1
 [1.1.0]: https://www.nuget.org/packages/Medo.Checksums/1.1.0
 [1.0.1]: https://www.nuget.org/packages/Medo.IO.Hashing/1.0.1
 [1.0.0]: https://www.nuget.org/packages/Medo.IO.Hashing/1.0.0
