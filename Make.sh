@@ -1,8 +1,8 @@
 #!/bin/bash
 BASE_DIRECTORY="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-PROJECT_FILE="src/Medo.IO.Hashing.csproj"
-TEST_PROJECT_FILE="tests/Medo.IO.Hashing.Tests.csproj"
+PROJECT_FILE="src/Medo.Checksums.csproj"
+TEST_PROJECT_FILE="tests/Medo.Checksums.Tests.csproj"
 PACKAGE_CONTENT_FILES="Makefile Make.sh CONTRIBUTING.md ICON.png LICENSE.md README.md .editorconfig"
 PACKAGE_CONTENT_DIRECTORIES="src/ tests/"
 

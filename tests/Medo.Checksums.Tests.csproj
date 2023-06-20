@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssemblyName>Medo.IO.Hashing.Tests</AssemblyName>
+    <AssemblyName>Medo.Checksums.Tests</AssemblyName>
     <RootNamespace>Tests</RootNamespace>
   </PropertyGroup>
 
@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Medo.IO.Hashing.csproj" />
+    <ProjectReference Include="..\src\Medo.Checksums.csproj" />
   </ItemGroup>
 
 </Project>

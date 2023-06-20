@@ -1,5 +1,5 @@
-Medo.IO.Hashing
-===============
+Medo.Checksums
+==============
 
 This is a versatile hashing library using .NET 6 NonCryptographicHashAlgorithm
 base.
@@ -125,8 +125,8 @@ algorithms.
 You can find packaged library at [NuGet][nuget] and add it you your application
 using the following command:
 
-    dotnet add package Medo.IO.Hashing
+    dotnet add package Medo.Checksums
 
 
 
-[nuget]: https://www.nuget.org/packages/Medo.IO.Hashing
+[nuget]: https://www.nuget.org/packages/Medo.Checksums
