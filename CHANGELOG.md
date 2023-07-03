@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.0] - 2023-07-03
+
+- Added .NET Standard 2.0 support
+
+
 ## [1.1.1] - 2023-06-19
 
 - Updated readme
