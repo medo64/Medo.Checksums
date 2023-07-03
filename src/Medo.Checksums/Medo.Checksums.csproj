@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>Medo.Checksums</AssemblyName>
+    <RootNamespace>Medo.IO.Hashing</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <LangVersion>11.0</LangVersion>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <AssemblyName>Medo.Checksums</AssemblyName>
-    <RootNamespace>Medo.IO.Hashing</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>

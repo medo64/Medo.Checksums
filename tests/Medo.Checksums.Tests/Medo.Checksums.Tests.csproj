@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>Medo.Checksums.Tests</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
     <Nullable>disable</Nullable>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <AssemblyName>Medo.Checksums.Tests</AssemblyName>
-    <RootNamespace>Tests</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>

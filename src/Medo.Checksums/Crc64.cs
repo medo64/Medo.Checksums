@@ -6,8 +6,11 @@ namespace Medo.IO.Hashing;
 
 using System;
 using System.Buffers.Binary;
-using System.IO.Hashing;
 using System.Runtime.CompilerServices;
+
+#if NET6_0_OR_GREATER
+using System.IO.Hashing;
+#endif
 
 /// <summary>
 /// Computes hash using 64-bit CRC algorithm.

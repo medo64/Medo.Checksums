@@ -11,9 +11,12 @@
 namespace Medo.IO.Hashing;
 
 using System;
-using System.IO.Hashing;
 using System.Runtime.InteropServices;
 using System.Text;
+
+#if NET6_0_OR_GREATER
+using System.IO.Hashing;
+#endif
 
 /// <summary>
 /// Computes checksum using Damm's algorithm from numerical input.
@@ -83,14 +86,19 @@ public sealed class Damm : NonCryptographicHashAlgorithm {
         digitsWithHash = digitsWithHash.Replace(" ", "").Replace("-", ""); //ignore dashes and spaces
         if (digitsWithHash.Length < 1) { throw new ArgumentOutOfRangeException(nameof(digitsWithHash), "Digits cannot be less than one character long."); }
 
+#if NET6_0_OR_GREATER
         var digits = digitsWithHash[0..^1];
         var hash = digitsWithHash[^1];
+#else
+        var digits = digitsWithHash.Substring(0, digitsWithHash.Length - 1);
+        var hash = digitsWithHash[digitsWithHash.Length - 1];
+#endif
         var checksum = new Damm();
         checksum.Append(Encoding.ASCII.GetBytes(digits));
         return (hash == checksum.HashAsChar);
     }
 
-    #endregion
+#endregion
 
 
     #region NonCryptographicHashAlgorithm

@@ -11,7 +11,10 @@ namespace Medo.IO.Hashing;
 
 using System;
 using System.Buffers.Binary;
+
+#if NET6_0_OR_GREATER
 using System.IO.Hashing;
+#endif
 
 /// <summary>
 /// Computes checksum using Fletcher-16 algorithm.
