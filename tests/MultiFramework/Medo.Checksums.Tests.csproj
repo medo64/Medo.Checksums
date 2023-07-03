@@ -26,7 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Medo.Checksums.csproj" />
+    <Compile Include="../Medo.Checksums.Tests/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/MultiFramework/Medo.Checksums.csproj" />
   </ItemGroup>
 
 </Project>

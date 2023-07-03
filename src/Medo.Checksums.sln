@@ -2,9 +2,9 @@
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medo.Checksums", "Medo.Checksums.csproj", "{9952686E-6B82-46C3-92B0-CD7015FA209A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medo.Checksums", "Medo.Checksums/Medo.Checksums.csproj", "{9952686E-6B82-46C3-92B0-CD7015FA209A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medo.Checksums.Tests", "..\tests\Medo.Checksums.Tests.csproj", "{C26A3537-3D60-463D-B4FA-0251E835A1E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medo.Checksums.Tests", "..\tests\Medo.Checksums.Tests/Medo.Checksums.Tests.csproj", "{C26A3537-3D60-463D-B4FA-0251E835A1E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

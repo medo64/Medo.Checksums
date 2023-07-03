@@ -1,8 +1,8 @@
 #!/bin/bash
 BASE_DIRECTORY="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-PROJECT_FILE="src/Medo.Checksums.csproj"
-TEST_PROJECT_FILE="tests/Medo.Checksums.Tests.csproj"
+PROJECT_FILE="src/MultiFramework/Medo.Checksums.csproj"
+TEST_PROJECT_FILE="tests/MultiFramework/Medo.Checksums.Tests.csproj"
 PACKAGE_CONTENT_FILES="Makefile Make.sh CONTRIBUTING.md ICON.png LICENSE.md README.md .editorconfig"
 PACKAGE_CONTENT_DIRECTORIES="src/ tests/"
 
@@ -104,17 +104,16 @@ function dist() {
 function debug() {
     echo
     mkdir -p "./bin/"
-    mkdir -p "./build/debug/"
+
     dotnet build "$PROJECT_FILE" \
                  --configuration "Debug" \
                  --verbosity "minimal" \
                  || return 1
-    ATLEAST_ONE_COPY=0
     for FRAMEWORK in $PACKAGE_FRAMEWORKS; do
-        cp -r "./src/bin/Debug/$FRAMEWORK/" "./bin/" 2>/dev/null
-        if [[ $? -eq 0 ]]; then ATLEAST_ONE_COPY=1; fi
+        cp -r "./src/MultiFramework/bin/Debug/$FRAMEWORK/" "./bin/" 2>/dev/null
+        if [[ $? -ne 0 ]]; then return 1; fi
     done
-    if [[ "$ATLEAST_ONE_COPY" -eq 0 ]]; then return 1; fi
+
     echo
     echo "${ANSI_GREEN}Output in ${ANSI_CYAN}bin/${ANSI_RESET}"
 }
@@ -125,17 +124,16 @@ function release() {
         echo "${ANSI_YELLOW}Uncommited changes present.${ANSI_RESET}" >&2
     fi
     mkdir -p "./bin/"
-    mkdir -p "./build/release/"
+
     dotnet build "$PROJECT_FILE" \
                  --configuration "Release" \
                  --verbosity "minimal" \
                  || return 1
-    ATLEAST_ONE_COPY=0
     for FRAMEWORK in $PACKAGE_FRAMEWORKS; do
-        cp -r "./src/bin/Release/$FRAMEWORK/" "./bin/" 2>/dev/null
-        if [[ $? -eq 0 ]]; then ATLEAST_ONE_COPY=1; fi
+        cp -r "./src/MultiFramework/bin/Release/$FRAMEWORK/" "./bin/" 2>/dev/null
+        if [[ $? -ne 0 ]]; then return 1; fi
     done
-    if [[ "$ATLEAST_ONE_COPY" -eq 0 ]]; then return 1; fi
+
     echo
     echo "${ANSI_GREEN}Output in ${ANSI_CYAN}bin/${ANSI_RESET}"
 }
