@@ -1,15 +1,14 @@
-Medo.Checksums
-==============
+CRC and checksum library
+========================
 
-This is a versatile hashing library using .NET 6 NonCryptographicHashAlgorithm
-base.
+This is a versatile hashing library.
 
 It provides support for various CRC-8, CRC-16, CRC-32, and CRC-64 error
 detection algorithms. These algorithms are widely used to detect errors in data
 transmission and storage and are known for their high accuracy and reliability.
 
 In addition to custom-defined CRC parameters, the following variants are
-supported:
+explicitly supported:
 * CRC-8/AUTOSAR
 * CRC-8/BLUETOOTH
 * CRC-8/CCITT
@@ -118,14 +117,13 @@ supported:
 * CRC-64/WE
 * CRC-64/XZ
 
-Furthermore, library supports Damm, Fletcher-16, and ISO 7064 checksum
-algorithms.
+Furthermore, library supports the following checksum algorithms:
+* Damm
+* Fletcher-16
+* ISO 7064
 
 
-You can find packaged library at [NuGet][nuget] and add it you your application
-using the following command:
-
-    dotnet add package Medo.Checksums
+You can find packaged library at [NuGet][nuget].
 
 
 
