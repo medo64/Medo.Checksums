@@ -156,7 +156,7 @@ if [ "$PACKAGE_LINUX_APPIMAGE" != "" ]; then
 
     PUBLISH_LINUX_APPIMAGE=$( cat "$SCRIPT_DIR/.meta.private" 2>/dev/null | grep -E "^PUBLISH_LINUX_APPIMAGE:" | sed  -n 1p | cut -d: -sf2- | xargs )
     if [ "$PUBLISH_LINUX_APPIMAGE" = "" ]; then
-        echo "${ANSI_PURPLE}AppImage remote .....: ${ANSI_MAGENTA}(not configured)${ANSI_RESET}" >&2
+        echo "${ANSI_PURPLE}AppImage remote .....: ${ANSI_YELLOW}(not configured)${ANSI_RESET}" >&2
     else
         echo "${ANSI_PURPLE}AppImage remote .....: ${ANSI_MAGENTA}$PUBLISH_LINUX_APPIMAGE${ANSI_RESET}"
     fi
@@ -174,9 +174,52 @@ if [ "$PACKAGE_LINUX_DEB" != "" ]; then
 
     PUBLISH_LINUX_DEB=$( cat "$SCRIPT_DIR/.meta.private" 2>/dev/null | grep -E "^PUBLISH_LINUX_DEB:" | sed  -n 1p | cut -d: -sf2- | xargs )
     if [ "$PUBLISH_LINUX_DEB" = "" ]; then
-        echo "${ANSI_PURPLE}Debian package remote: ${ANSI_MAGENTA}(not configured)${ANSI_RESET}" >&2
+        echo "${ANSI_PURPLE}Debian package remote: ${ANSI_YELLOW}(not configured)${ANSI_RESET}" >&2
     else
         echo "${ANSI_PURPLE}Debian package remote: ${ANSI_MAGENTA}$PUBLISH_LINUX_APPIMAGE${ANSI_RESET}"
+    fi
+fi
+
+
+PACKAGE_NUGET=$( cat "$SCRIPT_DIR/.meta" | grep -E "^PACKAGE_NUGET:" | sed  -n 1p | cut -d: -sf2- | xargs )
+if [ "$PACKAGE_NUGET" = "" ]; then  # auto-detect
+    if [ "$PROJECT_OUTPUTTYPE" = "library" ]; then
+        PACKAGE_NUGET=$PROJECT_NAME
+    fi
+fi
+if [ "$PACKAGE_NUGET" != "" ]; then
+    echo "${ANSI_PURPLE}NuGET package .......: ${ANSI_MAGENTA}$PACKAGE_NUGET${ANSI_RESET}"
+
+    PACKAGE_NUGET_ENTRYPOINT=$( cat "$SCRIPT_DIR/.meta" | grep -E "^PACKAGE_NUGET_ENTRYPOINT:" | sed  -n 1p | cut -d: -sf2- | xargs )
+    if [ "$PACKAGE_NUGET_ENTRYPOINT" = "" ]; then
+        PACKAGE_NUGET_ENTRYPOINT=$PROJECT_ENTRYPOINT
+    fi
+    echo "${ANSI_PURPLE}NuGET entry point ...: ${ANSI_MAGENTA}$PACKAGE_NUGET_ENTRYPOINT${ANSI_RESET}"
+
+    PACKAGE_NUGET_ID=`cat "$PACKAGE_NUGET_ENTRYPOINT" | grep "<PackageId>" | sed 's^</\?PackageId>^^g' | xargs`
+    if [ "$PACKAGE_NUGET_ID" = "" ]; then
+        PACKAGE_NUGET_ID=$PROJECT_NAME
+    fi
+    echo "${ANSI_PURPLE}NuGET package ID ....: ${ANSI_MAGENTA}$PACKAGE_NUGET_ID${ANSI_RESET}"
+
+    PACKAGE_NUGET_VERSION=`cat "$PACKAGE_NUGET_ENTRYPOINT" | grep "<Version>" | sed 's^</\?Version>^^g' | xargs`
+    if [ "$PACKAGE_NUGET_VERSION" = "" ]; then
+        PACKAGE_NUGET_VERSION=$GIT_VERSION_TEXT
+    fi
+    echo "${ANSI_PURPLE}NuGET package version: ${ANSI_MAGENTA}$PACKAGE_NUGET_VERSION${ANSI_RESET}"
+
+    PACKAGE_NUGET_FRAMEWORKS=`cat "$PACKAGE_NUGET_ENTRYPOINT" | grep "<TargetFramework" | sed 's^</\?TargetFrameworks\?>^^g' | tr ';' ' ' | xargs`
+    if [ "$PACKAGE_NUGET_FRAMEWORKS" = "" ]; then
+        echo "${ANSI_PURPLE}NuGET frameworks ....: ${ANSI_YELLOW}(not configured)${ANSI_RESET}" >&2
+    else
+        echo "${ANSI_PURPLE}NuGET frameworks ....: ${ANSI_MAGENTA}$PACKAGE_NUGET_FRAMEWORKS${ANSI_RESET}"
+    fi
+
+    PUBLISH_NUGET_KEY=$( cat "$SCRIPT_DIR/.meta.private" | grep -E "^PUBLISH_NUGET_KEY:" | sed  -n 1p | cut -d: -sf2- | xargs )
+    if [ "$PUBLISH_NUGET_KEY" = "" ]; then
+        echo "${ANSI_PURPLE}NuGET package key ...: ${ANSI_YELLOW}(not configured)${ANSI_RESET}" >&2
+    else
+        echo "${ANSI_PURPLE}NuGET package key ...: ${ANSI_MAGENTA}(configured)${ANSI_RESET}"
     fi
 fi
 
@@ -559,6 +602,32 @@ make_package() {
         done
     fi
 
+    if [ "$PACKAGE_NUGET" != "" ]; then
+        ANYTHING_DONE=1
+        echo "${ANSI_MAGENTA}nuget${ANSI_RESET}"
+
+        mkdir -p "$SCRIPT_DIR/build/nuget"
+        dotnet pack                            \
+            "$PACKAGE_NUGET_ENTRYPOINT"        \
+            --configuration "Release"          \
+            --force                            \
+            --include-source                   \
+            --output "./build/nuget/"          \
+            --verbosity "minimal"              \
+            --p:PackageId=$PACKAGE_NUGET_ID    \
+            --p:Version=$PACKAGE_NUGET_VERSION \
+            || return 1
+
+        mkdir -p "$SCRIPT_DIR/dist/"
+
+        echo
+        cp "$SCRIPT_DIR/build/nuget/$PACKAGE_NUGET_ID.$PACKAGE_NUGET_VERSION.nupkg"  "$SCRIPT_DIR/dist/" || return 1
+        echo "${ANSI_CYAN}dist/$PACKAGE_NUGET_ID.$PACKAGE_NUGET_VERSION.nupkg${ANSI_RESET}"
+        cp "$SCRIPT_DIR/build/nuget/$PACKAGE_NUGET_ID.$PACKAGE_NUGET_VERSION.snupkg" "$SCRIPT_DIR/dist/" || return 1
+        echo "${ANSI_CYAN}dist/$PACKAGE_NUGET_ID.$PACKAGE_NUGET_VERSION.snupkg${ANSI_RESET}"
+        echo
+    fi
+
     if [ "$ANYTHING_DONE" -eq 0 ]; then
         echo "${ANSI_RED}Nothing to package${ANSI_RESET}" >&2
         exit 113
@@ -639,6 +708,22 @@ make_publish() {
             echo "${ANSI_CYAN}$PUBLISH_LINUX_DEB_CURR${ANSI_RESET}"
             echo
         done
+    fi
+
+    if [ "$PUBLISH_NUGET_KEY" != "" ]; then
+        ANYTHING_DONE=1
+
+        if [ "$PACKAGE_NUGET_VERSION" = "0.0.0" ]; then
+            echo "${ANSI_RED}Not pushing version 0.0.0!${ANSI_RESET}" >&2
+            return 1;
+        fi
+        dotnet nuget push "./dist/$PACKAGE_NUGET_ID.$PACKAGE_NUGET_VERSION.nupkg" \
+                            --source "https://api.nuget.org/v3/index.json" \
+                            --api-key "$PUBLISH_NUGET_KEY" \
+                            --symbol-api-key "$PUBLISH_NUGET_KEY" \
+                            || return 1
+        echo "${ANSI_GREEN}Sent ${ANSI_CYAN}dist/$PACKAGE_NUGET_ID-$PACKAGE_NUGET_VERSION.nupkg${ANSI_RESET}"
+        echo
     fi
 
     if [ "$ANYTHING_DONE" -eq 0 ]; then
