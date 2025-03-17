@@ -82,6 +82,21 @@ public class Crc64_Tests {
         Assert.AreEqual("70B743DF82831B97", BitConverter.ToString(crc.GetCurrentHash()).Replace("-", ""));
     }
 
+    [TestMethod]  // NVME
+    public void Crc64_Nvme() {
+        var crc = Crc64.GetNvme();
+        crc.Append(Encoding.ASCII.GetBytes("123456789"));
+        Assert.AreEqual(0XAE8B14860A799888, crc.HashAsUInt64);
+    }
+
+    [TestMethod]  // NVME
+    public void Crc64_Nvme_2() {
+        var crc = Crc64.GetNvme();
+        crc.Append(Encoding.ASCII.GetBytes("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
+        Assert.AreEqual("9A2DEC63170B8C11", $"{crc.HashAsUInt64:X16}");
+        Assert.AreEqual("118C0B1763EC2D9A", BitConverter.ToString(crc.GetCurrentHash()).Replace("-", ""));
+    }
+
     [TestMethod]  // REDIS
     public void Crc64_Redis() {
         var crc = Crc64.GetRedis();

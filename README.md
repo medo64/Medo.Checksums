@@ -113,6 +113,7 @@ explicitly supported:
 * CRC-64/GO-ECMA
 * CRC-64/GO-ISO
 * CRC-64/MS
+* CRC-64/NVME
 * CRC-64/REDIS
 * CRC-64/WE
 * CRC-64/XZ

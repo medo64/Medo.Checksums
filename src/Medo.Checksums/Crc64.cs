@@ -74,6 +74,7 @@ public sealed class Crc64 : NonCryptographicHashAlgorithm {
     /// ECMA-182                                           0x42F0E1EBA9EA3693  0x0000000000000000  0x0000000000000000  -
     /// GO-ISO                                             0x000000000000001B  0xFFFFFFFFFFFFFFFF  0xFFFFFFFFFFFFFFFF  In/Out
     /// MS                                                 0x259C84CBA6426349  0xFFFFFFFFFFFFFFFF  0x0000000000000000  In/Out
+    /// NVME                                               0XAD93D23594C93659  0xFFFFFFFFFFFFFFFF  0xFFFFFFFFFFFFFFFF  In/Out
     /// REDIS                                              0xAD93D23594C935A9  0x0000000000000000  0x0000000000000000  In/Out
     /// WE                                                 0x42F0E1EBA9EA3693  0xFFFFFFFFFFFFFFFF  0xFFFFFFFFFFFFFFFF  -
     /// XZ / GO-ECMA                                       0x42F0E1EBA9EA3693  0xFFFFFFFFFFFFFFFF  0xFFFFFFFFFFFFFFFF  In/Out
@@ -134,6 +135,20 @@ public sealed class Crc64 : NonCryptographicHashAlgorithm {
     /// </remarks>
     public static Crc64 GetMs() {
         return new Crc64(0x259C84CBA6426349, 0xFFFFFFFFFFFFFFFF, true, true, 0x0000000000000000);
+    }
+
+    /// <summary>
+    /// Returns CRC-64/NVME variant.
+    /// </summary>
+    /// <remarks>
+    /// Polynom: 0XAD93D23594C93659
+    /// Initial value: 0xFFFFFFFFFFFFFFFF
+    /// Reflect In: Yes
+    /// Reflect Out: Yes
+    /// Output XOR: 0xFFFFFFFFFFFFFFFF
+    /// </remarks>
+    public static Crc64 GetNvme() {
+        return new Crc64(0XAD93D23594C93659, 0xFFFFFFFFFFFFFFFF, true, true, 0xFFFFFFFFFFFFFFFF);
     }
 
     /// <summary>
