@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.0] - 2025-03-16
+
+- Added CRC-64/NVME
+
+
 ## [1.2.0] - 2023-07-03
 
 - Added .NET Standard 2.0 support
@@ -27,6 +32,8 @@
 
 
 [unreleased]: https://github.com/medo64/Medo.Checksums/
+[1.3.0]: https://www.nuget.org/packages/Medo.Checksums/1.3.0
+[1.2.0]: https://www.nuget.org/packages/Medo.Checksums/1.2.0
 [1.1.1]: https://www.nuget.org/packages/Medo.Checksums/1.1.1
 [1.1.0]: https://www.nuget.org/packages/Medo.Checksums/1.1.0
 [1.0.1]: https://www.nuget.org/packages/Medo.IO.Hashing/1.0.1
