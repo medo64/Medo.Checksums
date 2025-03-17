@@ -1,0 +1,8 @@
+# Project name
+PROJECT_NAME:           Medo.Checksums
+
+# Project entry point
+PROJECT_ENTRYPOINT:     src/Medo.Checksums/Medo.Checksums.csproj
+
+# List of project runtimes
+PROJECT_RUNTIMES:       current linux-x64 linux-musl-x64 win-x64

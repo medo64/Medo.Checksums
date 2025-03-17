@@ -1,13 +1,18 @@
+#~ .NET Project
+
 bin/
 build/
 dist/
 research/
 
-**/.vs/
 **/bin/
 **/obj/
+**/.idea/
+**/.vs/
+**/*.csproj.user
+**/*.DotSettings.user
+**/BenchmarkDotNet.Artifacts
 
-.*.swp
-*.zip
-
+TODO.md
+.meta.private
 .nuget.key
