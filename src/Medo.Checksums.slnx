@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../tests/Medo.Checksums.Tests/Medo.Checksums.Tests.csproj" />
+  <Project Path="Medo.Checksums/Medo.Checksums.csproj" />
+</Solution>
