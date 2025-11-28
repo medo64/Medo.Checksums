@@ -90,7 +90,7 @@ public sealed class Crc8 : NonCryptographicHashAlgorithm {
     /// SMBUS                        0x07 (x⁸ + x² + x + 1)             0x00  0x00  -
     /// TECH-3250                    0x1D (x⁸ + x⁴ + x³ + 1)            0xFF  0x00  In/Out
     /// WCDMA2000                    0x9B (x⁸ + x⁷ +  x⁴ + x³ + x + 1)  0x00  0x00  In/Out
-    /// 
+    ///
     /// See also:
     /// - https://reveng.sourceforge.io/crc-catalogue/1-15.htm
     /// - https://users.ece.cmu.edu/~koopman/crc/index.html
