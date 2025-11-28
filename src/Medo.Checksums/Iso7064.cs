@@ -108,7 +108,7 @@ public sealed class Iso7064 : NonCryptographicHashAlgorithm {
     /// <inheritdoc/>
     protected override void GetCurrentHashCore(Span<byte> destination) {
         var hash = (byte)(0x30 + HashAsNumber);
-        MemoryMarshal.Write(destination, ref hash);
+        MemoryMarshal.Write(destination, in hash);
     }
 
     #endregion NonCryptographicHashAlgorithm
