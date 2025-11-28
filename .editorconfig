@@ -276,6 +276,8 @@ csharp_prefer_system_threading_lock                                           = 
 ## Use conditional delegate call (IDE1005)
 csharp_style_conditional_delegate_call                                        = true : suggestion
 # Extra
+## CA1008: Enums should have zero value
+dotnet_diagnostic.CA1008.severity                                             = none
 ## CA1031: Do not catch general exception types
 dotnet_diagnostic.CA1031.severity                                             = none
 ## CA1710: Identifiers should have correct suffix
