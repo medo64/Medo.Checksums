@@ -519,7 +519,11 @@ public sealed class Crc8 : NonCryptographicHashAlgorithm {
     /// <inheritdoc/>
     protected override void GetCurrentHashCore(Span<byte> destination) {
         var hash = HashAsByte;
+#if NET8_0_OR_GREATER
         MemoryMarshal.Write(destination, in hash);
+#else
+        MemoryMarshal.Write(destination, ref hash);
+#endif
     }
 
     #endregion NonCryptographicHashAlgorithm
