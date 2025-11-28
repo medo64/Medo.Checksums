@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.0] - 2025-11-27
+
+- .NET 10.0 support
+
+
 ## [1.3.0] - 2025-03-16
 
 - Added CRC-64/NVME
